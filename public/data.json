@@ -1,0 +1,98 @@
+[
+  {
+    "id": 1,
+    "country": "Thailand",
+    "image": "/slide1.jpg", 
+    "visaType": "Tourist/Medical",
+    "price": "৳২৪,৫০০",
+    "countryCode": "th"
+  },
+  {
+    "id": 2,
+    "country": "Malaysia",
+    "image": "/slide2.jpg",
+    "visaType": "E-Visa/Sticker",
+    "price": "৳২৮,০০০",
+    "countryCode": "my"
+  },
+  {
+    "id": 3,
+    "country": "Singapore",
+    "image": "/slide3.jpg",
+    "visaType": "Entry Visa",
+    "price": "৳৩৫,০০০",
+    "countryCode": "sg"
+  },
+  {
+    "id": 4,
+    "country": "Maldives",
+    "image": "/slide4.jpg",
+    "visaType": "On Arrival",
+    "price": "৳৫৫,০০০",
+    "countryCode": "mv"
+  },
+  {
+    "id": 5,
+    "country": "United Arab Emirates",
+    "image": "",
+    "visaType": "Tourist/Business",
+    "price": "৳১২,৫০০",
+    "countryCode": "ae"
+  },
+  {
+    "id": 6,
+    "country": "India",
+    "image": "",
+    "visaType": "Tourist/Medical",
+    "price": "৳১,৫০০",
+    "countryCode": "in"
+  },
+  {
+    "id": 7,
+    "country": "Saudi Arabia",
+    "image": "",
+    "visaType": "Umrah/Tourist",
+    "price": "৳১৪,০০০",
+    "countryCode": "sa"
+  },
+  {
+    "id": 8,
+    "country": "United Kingdom",
+    "image": "",
+    "visaType": "Standard Visitor",
+    "price": "৳১৮,৫০০",
+    "countryCode": "gb"
+  },
+  {
+    "id": 9,
+    "country": "Turkey",
+    "image": "",
+    "visaType": "Tourist/E-Visa",
+    "price": "৳৯,০০০",
+    "countryCode": "tr"
+  },
+  {
+    "id": 10,
+    "country": "United States",
+    "image": "",
+    "visaType": "B1/B2 Visa",
+    "price": "৳২১,০০০",
+    "countryCode": "us"
+  },
+  {
+    "id": 11,
+    "country": "Canada",
+    "image": "",
+    "visaType": "Visitor Visa",
+    "price": "৳১৯,০০০",
+    "countryCode": "ca"
+  },
+  {
+    "id": 12,
+    "country": "Vietnam",
+    "image": "",
+    "visaType": "E-Visa",
+    "price": "৳৪,৫০০",
+    "countryCode": "vn"
+  }
+]
