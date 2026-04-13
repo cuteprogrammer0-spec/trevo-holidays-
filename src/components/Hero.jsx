@@ -6,32 +6,67 @@ import slide2 from '../assets/hero-slides/slide2.jpg';
 import slide3 from '../assets/hero-slides/slide3.jpg';
 import slide4 from '../assets/hero-slides/slide4.jpg';
 
-// এখানে ( { onBookingClick } ) প্রপসটি রিসিভ করছি
-const Hero = ({ onBookingClick }) => {
+const Hero = ({ onBookingClick, language }) => {
   const slides = [
     {
       img: slide1,
-      topBadge: "🇹🇭 থাইল্যান্ড স্পেশাল প্যাকেজ",
-      headline: "ব্যাংকক ও ফুকেটের নীল সমুদ্রে",
-      description: "সবচেয়ে কম খরচে থাইল্যান্ড ট্যুর প্যাকেজ এবং দ্রুত ভিসা প্রসেসিং। আজই আপনার স্লট বুক করুন।"
+      topBadge: {
+        bn: "🇹🇭 থাইল্যান্ড স্পেশাল প্যাকেজ",
+        en: "🇹🇭 Thailand Special Package"
+      },
+      headline: {
+        bn: "ব্যাংকক ও ফুকেটের নীল সমুদ্রে",
+        en: "To the Blue Seas of Bangkok & Phuket"
+      },
+      description: {
+        bn: "সবচেয়ে কম খরচে থাইল্যান্ড ট্যুর প্যাকেজ এবং দ্রুত ভিসা প্রসেসিং। আজই আপনার স্লট বুক করুন।",
+        en: "Thailand tour packages at the lowest cost and fast visa processing. Book your slot today."
+      }
     },
     {
       img: slide2,
-      topBadge: "🇲🇻 মালদ্বীপ হানিমুন অফার",
-      headline: "বিলাসবহুল রিসোর্টে স্বপ্নের ছুটি",
-      description: "মালদ্বীপের নীল জলে হারিয়ে যান আমাদের এক্সক্লুসিভ অল-ইনক্লুসিভ প্যাকেজে।"
+      topBadge: {
+        bn: "🇲🇻 মালদ্বীপ হানিমুন অফার",
+        en: "🇲🇻 Maldives Honeymoon Offer"
+      },
+      headline: {
+        bn: "বিলাসবহুল রিসোর্টে স্বপ্নের ছুটি",
+        en: "Dream Vacation in Luxury Resorts"
+      },
+      description: {
+        bn: "মালদ্বীপের নীল জলে হারিয়ে যান আমাদের এক্সক্লুসিভ অল-ইনক্লুসিভ প্যাকেজে।",
+        en: "Get lost in the blue waters of Maldives with our exclusive all-inclusive packages."
+      }
     },
     {
       img: slide3,
-      topBadge: "🇲🇾 মালয়েশিয়া ও সিঙ্গাপুর",
-      headline: "আধুনিক শহর আর টুইন টাওয়ারের দেশে",
-      description: "ফ্যামিলি ট্যুর বা বিজনেস ট্রিপ—মালয়েশিয়া ও সিঙ্গাপুরের সেরা ডিল এখন আপনার হাতের মুঠোয়।"
+      topBadge: {
+        bn: "🇲🇾 মালয়েশিয়া ও সিঙ্গাপুর",
+        en: "🇲🇾 Malaysia & Singapore"
+      },
+      headline: {
+        bn: "আধুনিক শহর আর টুইন টাওয়ারের দেশে",
+        en: "In the Land of Modern Cities & Twin Towers"
+      },
+      description: {
+        bn: "ফ্যামিলি ট্যুর বা বিজনেস ট্রিপ—মালয়েশিয়া ও সিঙ্গাপুরের সেরা ডিল এখন আপনার হাতের মুঠোয়।",
+        en: "Family tours or business trips—the best deals for Malaysia & Singapore are now in your hands."
+      }
     },
     {
       img: slide4,
-      topBadge: "🌍 গ্লোবাল ভিসা সリューション",
-      headline: "বিশ্বের যেকোনো দেশের ভিসা এখন সহজ",
-      description: "বাংলাদেশ থেকে আমেরিকা, ইউরোপ, ওমরাহসহ সব দেশের ভিসা প্রসেসিং করি আমরা শতভাগ নিশ্চয়তায়।"
+      topBadge: {
+        bn: "🌍 গ্লোবাল ভিসা সলিউশন",
+        en: "🌍 Global Visa Solution"
+      },
+      headline: {
+        bn: "বিশ্বের যেকোনো দেশের ভিসা এখন সহজ",
+        en: "Visa for Any Country is Now Easy"
+      },
+      description: {
+        bn: "বাংলাদেশ থেকে আমেরিকা, ইউরোপ, ওমরাহসহ সব দেশের ভিসা প্রসেসিং করি আমরা শতভাগ নিশ্চয়তায়।",
+        en: "We process visas for USA, Europe, Umrah, and all countries from Bangladesh with 100% guarantee."
+      }
     }
   ];
 
@@ -66,30 +101,29 @@ const Hero = ({ onBookingClick }) => {
       {/* কন্টেন্ট অংশ */}
       <div className="relative z-10 h-full flex flex-col items-center justify-center text-white text-center px-6">
         <div className="bg-blue-600 px-4 py-1 rounded-full text-xs md:text-sm mb-6 shadow-lg">
-          {slides[currentIndex].topBadge}
+          {slides[currentIndex].topBadge[language]}
         </div>
         
         <h1 className="text-3xl md:text-6xl font-bold mb-4 leading-tight drop-shadow-md">
-          {slides[currentIndex].headline}
+          {slides[currentIndex].headline[language]}
         </h1>
         
         <p className="max-w-2xl text-sm md:text-xl mb-10 text-gray-200">
-          {slides[currentIndex].description}
+          {slides[currentIndex].description[language]}
         </p>
         
         <div className="flex flex-col sm:flex-row gap-4">
-          {/* এই বাটন দুটিতে onClick={onBookingClick} যোগ করা হয়েছে */}
           <button 
             onClick={onBookingClick}
             className="bg-yellow-500 hover:bg-yellow-400 text-black px-10 py-3 rounded-full font-bold transition-all transform active:scale-95 shadow-lg"
           >
-            ভিসার জন্য কল দিন
+            {language === 'bn' ? 'ভিসার জন্য কল দিন' : 'Call for Visa'}
           </button>
           <button 
             onClick={onBookingClick}
             className="border-2 border-white hover:bg-white hover:text-black px-10 py-3 rounded-full font-bold transition-all transform active:scale-95"
           >
-            প্যাকেজ দেখুন
+            {language === 'bn' ? 'প্যাকেজ দেখুন' : 'View Packages'}
           </button>
         </div>
       </div>
