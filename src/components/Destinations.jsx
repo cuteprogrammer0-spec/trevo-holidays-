@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const Destinations = ({ onBookingClick, language }) => {
   const [destinations, setDestinations] = useState([]);
@@ -6,7 +7,7 @@ const Destinations = ({ onBookingClick, language }) => {
   const [showAll, setShowAll] = useState(false);
 
   useEffect(() => {
-    fetch('/data.json') 
+    fetch('/data.json')
       .then((res) => res.json())
       .then((data) => {
         setDestinations(data);
@@ -18,95 +19,76 @@ const Destinations = ({ onBookingClick, language }) => {
       });
   }, []);
 
-  const visibleDestinations = showAll ? destinations : destinations.slice(0, 4);
+  const displayCount = showAll ? destinations.length : 4;
 
   if (loading) return (
-    <div className="text-center py-20 font-bold">
-      {language === 'bn' ? 'লোড হচ্ছে...' : 'Loading...'}
+    <div className="flex items-center justify-center py-40">
+      <div className="w-10 h-10 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
     </div>
   );
 
   return (
-    <section className="py-20 bg-gray-50">
-      <div className="container mx-auto px-6">
-        <h2 className="text-4xl font-bold text-center mb-4 text-gray-800">
-          {language === 'bn' ? 'আমাদের জনপ্রিয় গন্তব্য' : 'Our Popular Destinations'}
-        </h2>
-        <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
-          {language === 'bn' 
-            ? 'বিশ্বের যে প্রান্তেই যেতে চান না কেন, আমরা আছি আপনার পাশে। জনপ্রিয় গন্তব্যগুলো নিচে দেখুন।' 
-            : 'No matter where in the world you want to go, we are by your side. Check out the popular destinations below.'}
-        </p>
+    <section className="py-20 bg-[#F8FAFC]" id="destinations">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-5xl font-extrabold mb-4 text-slate-900">
+            {language === 'bn' ? 'আমাদের জনপ্রিয় গন্তব্য' : 'Our Popular Destinations'}
+          </h2>
+          <div className="h-1.5 w-20 bg-yellow-500 mx-auto rounded-full mb-6" />
+        </div>
         
-        {/* কার্ড গ্রিড */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {visibleDestinations.map((dest, index) => (
-            <div key={dest.id} className="bg-white rounded-2xl overflow-hidden shadow-lg group border border-gray-100 hover:shadow-2xl transition-all duration-300">
-              <div className="relative h-56 overflow-hidden bg-gray-100 flex items-center justify-center">
-                {dest.image ? (
+        <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+          <AnimatePresence>
+            {destinations.slice(0, displayCount).map((dest) => (
+              <motion.div 
+                key={dest.id}
+                layout
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                whileHover={{ y: -10 }}
+                className="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 border border-slate-100 group"
+              >
+                <div className="relative h-64 overflow-hidden bg-slate-100">
                   <img 
-                    src={dest.image} 
-                    alt={language === 'bn' ? dest.countryBN : dest.countryEN} 
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    src={dest.image || `https://flagcdn.com/w320/${dest.countryCode.toLowerCase()}.png`} 
+                    alt={dest.countryEN} 
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                   />
-                ) : (
-                  <div className="flex flex-col items-center justify-center p-4">
-                    <img 
-                      src={`https://flagcdn.com/w320/${dest.countryCode.toLowerCase()}.png`} 
-                      alt={dest.countryEN}
-                      className="w-32 shadow-md rounded-sm group-hover:scale-110 transition-transform duration-500"
-                    />
-                  </div>
-                )}
-              </div>
-              
-              <div className="p-6">
-                <h3 className="text-2xl font-bold mb-2">
-                  {language === 'bn' ? dest.countryBN : dest.countryEN}
-                </h3>
-                <p className="text-sm text-gray-500 mb-4 font-medium">
-                  {language === 'bn' ? 'ভিসা:' : 'Visa:'} {language === 'bn' ? dest.visaTypeBN : dest.visaTypeEN}
-                </p>
-                <div className="flex justify-between items-center">
-                  <span className="text-blue-600 font-bold">
+                  <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full text-blue-700 font-bold text-sm">
                     {language === 'bn' ? dest.priceBN : dest.priceEN}
-                  </span>
+                  </div>
+                </div>
+                <div className="p-6">
+                  <h3 className="text-2xl font-bold mb-2 text-slate-800">
+                    {language === 'bn' ? dest.countryBN : dest.countryEN}
+                  </h3>
+                  <p className="text-sm text-slate-500 mb-6 font-medium">
+                    {language === 'bn' ? 'ভিসা:' : 'Visa:'} {language === 'bn' ? dest.visaTypeBN : dest.visaTypeEN}
+                  </p>
                   <button 
                     onClick={onBookingClick}
-                    className="bg-yellow-500 hover:bg-yellow-400 px-4 py-2 rounded-lg font-bold text-sm transition-colors active:scale-95 shadow-sm"
+                    className="w-full bg-slate-900 hover:bg-yellow-500 hover:text-black text-white py-3 rounded-2xl font-bold transition-all"
                   >
-                    {language === 'bn' ? 'বুকিং' : 'Booking'}
+                    {language === 'bn' ? 'বুকিং করুন →' : 'Book Now →'}
                   </button>
                 </div>
-              </div>
-            </div>
-          ))}
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </motion.div>
+
+        <div className="text-center mt-16">
+          <button 
+            onClick={() => setShowAll(!showAll)}
+            className="bg-blue-600 text-white px-12 py-4 rounded-full font-bold hover:bg-blue-700 transition-all shadow-xl"
+          >
+            {showAll 
+              ? (language === 'bn' ? 'কমিয়ে দেখান' : 'Show Less')
+              : (language === 'bn' ? `সকল গন্তব্য দেখুন (${destinations.length}+)` : `View All (${destinations.length}+)`)
+            }
+          </button>
         </div>
-
-        {/* View All বাটন */}
-        {!showAll && destinations.length > 4 && (
-          <div className="text-center mt-12">
-            <button 
-              onClick={() => setShowAll(true)}
-              className="bg-blue-600 text-white px-10 py-3 rounded-full font-bold hover:bg-blue-700 transition-all shadow-lg hover:-translate-y-1"
-            >
-              {language === 'bn' 
-                ? `সকল গন্তব্য দেখুন (${destinations.length}+)` 
-                : `View All Destinations (${destinations.length}+)`}
-            </button>
-          </div>
-        )}
-
-        {showAll && (
-          <div className="text-center mt-12">
-            <button 
-              onClick={() => setShowAll(false)}
-              className="text-blue-600 font-bold hover:underline"
-            >
-              {language === 'bn' ? 'কমিয়ে দেখান' : 'Show Less'}
-            </button>
-          </div>
-        )}
       </div>
     </section>
   );
